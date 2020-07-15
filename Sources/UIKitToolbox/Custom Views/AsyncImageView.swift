@@ -45,8 +45,21 @@ public class AsyncImageView: UIImageView {
         }
         #endif
         
+        if let cachedResponse = urlCache.cachedResponse(for: request) {
+            loadLock.lock()
+            imageURLRequest = request
+            loadLock.unlock()
+            handleLoadImageResult(data: cachedResponse.data,
+                                  error: nil,
+                                  url: url,
+                                  errorHandler: errorHandler)
+            return
+        }
+        
         let task = urlSession.dataTask(with: request) { [weak self] data, _, error in
-            self?.handleLoadImageResult(data: data, error: error, url: url, errorHandler: errorHandler)
+            DispatchQueue.main.async {
+                self?.handleLoadImageResult(data: data, error: error, url: url, errorHandler: errorHandler)
+            }
         }
         
         loadLock.lock()
@@ -60,19 +73,15 @@ public class AsyncImageView: UIImageView {
     }
     
     private func handleLoadImageResult(data: Data?, error: Swift.Error?, url: URL, errorHandler: ErrorHandler?) {
-        guard error == nil else {
+        if let error = error {
             if !isCancellationError(error) {
-                DispatchQueue.main.async {
-                    errorHandler?(self, url, Error.failedToLoad(underlying: error!))
-                }
+                errorHandler?(self, url, Error.failedToLoad(underlying: error))
             }
             return
         }
         
         guard let imageData = data, let image = UIImage(data: imageData) else {
-            DispatchQueue.main.async {
-                errorHandler?(self, url, Error.invalidImageData(data: data))
-            }
+            errorHandler?(self, url, Error.invalidImageData(data: data))
             return
         }
         
@@ -81,19 +90,19 @@ public class AsyncImageView: UIImageView {
         loadLock.unlock()
         
         if isLatestRequestedImage {
-            DispatchQueue.main.async { [weak self] in
-                self?.image = image
-            }
+            self.image = image
         }
     }
     
     #if DEBUG
     private func logCacheStatus(for request: URLRequest) {
+        // swiftlint:disable force_unwrapping
         if urlCache.cachedResponse(for: request) == nil {
             print("❌ \(request.url!)")
         } else {
             print("✅ \(request.url!)")
         }
+        // swiftlint:enable force_unwrapping
     }
     #endif
 }
@@ -116,8 +125,8 @@ private class AsyncImageURLSessionFactory: NSObject {
     }
 }
 
-private func isCancellationError(_ error: Error?) -> Bool {
-    if let error = error, (error as NSError).code == NSURLErrorCancelled {
+private func isCancellationError(_ error: Error) -> Bool {
+    if (error as NSError).code == NSURLErrorCancelled {
         return true
     }
     return false

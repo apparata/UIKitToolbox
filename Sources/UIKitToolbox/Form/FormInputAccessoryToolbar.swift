@@ -6,7 +6,7 @@
 
 import UIKit
 
-public protocol FormInputAccessoryToolbarDelegate: class {
+public protocol FormInputAccessoryToolbarDelegate: AnyObject {
     func toolbarDidTapPrevious(_ toolbar: FormInputAccessoryToolbar)
     func toolbarDidTapNext(_ toolbar: FormInputAccessoryToolbar)
     func toolbarDidTapDone(_ toolbar: FormInputAccessoryToolbar)

@@ -33,6 +33,12 @@ public class CannedAnimation {
         }, completion: nil)
     }
     
+    public static func crossFade(label: UILabel, newAttributedText: NSAttributedString?, duration: TimeInterval = 0.4) {
+        UIView.transition(with: label, duration: duration, options: .transitionCrossDissolve, animations: { () -> Void in
+            label.attributedText = newAttributedText
+        }, completion: nil)
+    }
+    
     public static func crossFade(textField: UITextField, newText: String, duration: TimeInterval = 0.4) {
         UIView.transition(with: textField, duration: duration, options: .transitionCrossDissolve, animations: { () -> Void in
             textField.text = newText

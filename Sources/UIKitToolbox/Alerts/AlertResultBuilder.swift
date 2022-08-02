@@ -95,7 +95,7 @@ public class AbstractAlert {
         for action in actions {
             let alertAction = UIAlertAction(title: action.title,
                                             style: action.style) { _ in
-                action.action()
+                action.action?()
             }
             if let tint = action.tint {
                 alertAction.setValue(tint, forKey: "titleTextColor")
@@ -130,7 +130,7 @@ public protocol AbstractAlertAction {
     var title: String { get }
     var style: UIAlertAction.Style { get }
     var tint: UIColor? { get }
-    var action: () -> Void { get }
+    var action: (() -> Void)? { get }
 }
 
 // MARK: Alert Action
@@ -139,7 +139,7 @@ public struct AlertAction: AbstractAlertAction {
     public let title: String
     public let style: UIAlertAction.Style
     public let tint: UIColor?
-    public let action: () -> Void
+    public let action: (() -> Void)?
     
     public init(_ title: String, tint: UIColor? = nil, _ action: @escaping () -> Void) {
         self.title = title
@@ -155,7 +155,7 @@ public struct SheetAction: AbstractAlertAction {
     public let title: String
     public let style: UIAlertAction.Style
     public let tint: UIColor?
-    public let action: () -> Void
+    public let action: (() -> Void)?
     
     public init(_ title: String, tint: UIColor? = nil, _ action: @escaping () -> Void) {
         self.title = title
@@ -171,7 +171,7 @@ public struct OKAction: AbstractAlertAction {
     public let title: String
     public let style: UIAlertAction.Style
     public let tint: UIColor?
-    public let action: () -> Void
+    public let action: (() -> Void)?
     
     public init(_ title: String = "OK", tint: UIColor? = nil, _ action: @escaping () -> Void) {
         self.title = title
@@ -187,7 +187,7 @@ public struct DestructiveAction: AbstractAlertAction {
     public let title: String
     public let style: UIAlertAction.Style
     public let tint: UIColor?
-    public let action: () -> Void
+    public let action: (() -> Void)?
     
     public init(_ title: String, tint: UIColor? = nil, _ action: @escaping () -> Void) {
         self.title = title
@@ -203,9 +203,9 @@ public struct CancelAction: AbstractAlertAction {
     public let title: String
     public let style: UIAlertAction.Style
     public let tint: UIColor?
-    public let action: () -> Void
+    public let action: (() -> Void)?
     
-    public init(_ title: String = "Cancel", tint: UIColor? = nil, _ action: @escaping () -> Void) {
+    public init(_ title: String = "Cancel", tint: UIColor? = nil, _ action: (() -> Void)? = nil) {
         self.title = title
         self.style = .cancel
         self.tint = tint

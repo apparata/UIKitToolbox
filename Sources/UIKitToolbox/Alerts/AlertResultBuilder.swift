@@ -218,30 +218,30 @@ public struct CancelAction: AbstractAlertAction {
 @resultBuilder
 public struct AlertBuilder {
     
-    typealias Expression = AbstractAlertAction
-    typealias Component = [AbstractAlertAction]
+    public typealias Expression = AbstractAlertAction
+    public typealias Component = [AbstractAlertAction]
     
-    static func buildExpression(_ expression: Expression) -> Component {
+    public static func buildExpression(_ expression: Expression) -> Component {
         return [expression]
     }
     
-    static func buildBlock(_ children: Component...) -> Component {
+    public static func buildBlock(_ children: Component...) -> Component {
         return children.flatMap { $0 }
     }
     
-    static func buildIf(_ component: Component?) -> Component {
+    public static func buildIf(_ component: Component?) -> Component {
         return component ?? []
     }
     
-    static func buildEither(first component: Component) -> Component {
+    public static func buildEither(first component: Component) -> Component {
         return component
     }
 
-    static func buildEither(second component: Component) -> Component {
+    public static func buildEither(second component: Component) -> Component {
         return component
     }
     
-    static func buildArray(_ components: [Component]) -> Component {
+    public static func buildArray(_ components: [Component]) -> Component {
         return components.flatMap { $0 }
     }
 }

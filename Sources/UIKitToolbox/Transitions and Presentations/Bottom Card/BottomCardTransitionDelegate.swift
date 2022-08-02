@@ -27,12 +27,15 @@ public enum BottomCardBackgroundMode {
 /// }
 /// ```
 ///
-public class BottomCardTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
+public class BottomCardTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate, UIAdaptivePresentationControllerDelegate {
     
     public var springDamping: CGFloat
 
     public var mode: BottomCardBackgroundMode
     
+    public var willDismiss: (() -> Void)?
+    public var didDismiss: (() -> Void)?
+
     public init(springDamping: CGFloat = 0.6,
                 mode: BottomCardBackgroundMode = .dim(color: .black, alpha: 0.4)) {
         self.springDamping = springDamping
@@ -40,17 +43,25 @@ public class BottomCardTransitionDelegate: NSObject, UIViewControllerTransitioni
         super.init()
     }
     
+    deinit {
+        
+    }
+    
     // Use this to configure the view controller to present
-    public func attach(to viewController: UIViewController) {
+    public func attach(to viewController: UIViewController, willDismiss: (() -> Void)? = nil, didDismiss: (() -> Void)? = nil) {
         guard !UIAccessibility.isReduceMotionEnabled else {
             return
         }
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self
+        self.willDismiss = willDismiss
+        self.didDismiss = didDismiss
     }
     
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return BottomCardPresentationController(presented: presented, presenting: presenting, mode: mode)
+        let presentationController = BottomCardPresentationController(presented: presented, presenting: presenting, mode: mode)
+        presentationController.delegate = self
+        return presentationController
     }
     
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

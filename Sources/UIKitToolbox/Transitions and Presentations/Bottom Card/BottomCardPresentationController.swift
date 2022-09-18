@@ -97,10 +97,9 @@ public class BottomCardPresentationController: UIPresentationController {
     
     private func animateInDimView(in containerView: UIView, dimColor: UIColor, dimAlpha: CGFloat) {
         let dimmingView = UIView(frame: containerView.bounds)
-        dimmingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         dimmingView.backgroundColor = dimColor
         dimmingView.alpha = 0.0
-        containerView.addSubview(dimmingView)
+        containerView.addSubview(dimmingView, constrainedTo: .superview)
         self.dimmingView = dimmingView
         
         animate(alongsideTransition: { context in
@@ -117,14 +116,12 @@ public class BottomCardPresentationController: UIPresentationController {
     private func animateInBlurView(in containerView: UIView, blurStyle: UIBlurEffect.Style) {
         let blurView = UIVisualEffectView(effect: nil)
         blurView.frame = containerView.bounds
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        containerView.addSubview(blurView)
+        containerView.addSubview(blurView, constrainedTo: .superview)
         self.blurView = blurView
         
         let vibrancyView = UIVisualEffectView(effect: nil)
         vibrancyView.frame = containerView.bounds
-        vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.blurView?.contentView.addSubview(vibrancyView)
+        self.blurView?.contentView.addSubview(vibrancyView, constrainedTo: .superview)
         
         animate(alongsideTransition: { context in
             let blurEffect = UIBlurEffect(style: blurStyle)

@@ -2,7 +2,7 @@
 //  Copyright © 2015 Apparata AB. All rights reserved.
 //
 
-#if canImport(UIKit) && os(iOS)
+#if canImport(UIKit)
 
 import UIKit
 
@@ -23,7 +23,11 @@ public class VerticalLineView: UIView {
     }
 
     private func draw1PixelStroke(context: CGContext, startPoint: CGPoint, endPoint: CGPoint, color: CGColor) {
+        #if os(iOS)
         let lineWidth = 1.0 / UIScreen.main.scale
+        #else
+        let lineWidth = 0.5
+        #endif
         context.saveGState()
 
         if dash > 0.0 || space > 0.0 {

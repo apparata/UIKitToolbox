@@ -2,11 +2,11 @@
 //  Copyright © 2019 Apparata AB. All rights reserved.
 //
 
-#if canImport(UIKit) && os(iOS)
+#if canImport(UIKit)
 
 import UIKit
 
-open class ArrayTableViewController<Item, Cell: UITableViewCell & NibBacked>: UITableViewController {
+open class ArrayTableViewController<Item, Cell: UITableViewCell & NibBacked & CellReuseIdentifier>: UITableViewController {
     
     public typealias SectionIndex = ArrayDataSource<Item, Cell>.SectionIndex
     public typealias ItemIndex = ArrayDataSource<Item, Cell>.ItemIndex

@@ -2,7 +2,7 @@
 //  Copyright © 2019 Apparata AB. All rights reserved.
 //
 
-#if canImport(UIKit) && os(iOS)
+#if canImport(UIKit)
 
 import UIKit
 
@@ -16,8 +16,8 @@ public struct ArrayDataSourceSection<Item> {
     }
 }
 
-public class ArrayDataSource<Item, Cell: UITableViewCell>: NSObject, UITableViewDataSource {
-    
+public class ArrayDataSource<Item, Cell: UITableViewCell & CellReuseIdentifier>: NSObject, UITableViewDataSource {
+
     public typealias SectionIndex = Int
     public typealias ItemIndex = Int
     public typealias Section = ArrayDataSourceSection<Item>
@@ -67,7 +67,7 @@ public class ArrayDataSource<Item, Cell: UITableViewCell>: NSObject, UITableView
     
 }
 
-public class ArrayDataSourceAndDelegate<Item, Cell: UITableViewCell>: ArrayDataSource<Item, Cell>, UITableViewDelegate {
+public class ArrayDataSourceAndDelegate<Item, Cell: UITableViewCell & CellReuseIdentifier>: ArrayDataSource<Item, Cell>, UITableViewDelegate {
     
     public var didSelectItem: ((Item, Section, SectionIndex, ItemIndex) -> Void)?
     public var didDeselectItem: ((Item, Section, SectionIndex, ItemIndex) -> Void)?

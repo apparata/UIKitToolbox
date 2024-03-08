@@ -2,7 +2,7 @@
 //  Copyright © 2015 Apparata. All rights reserved.
 //
 
-#if canImport(UIKit)
+#if canImport(UIKit) && os(iOS)
 
 import UIKit
 

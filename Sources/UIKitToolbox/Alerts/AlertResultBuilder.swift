@@ -2,6 +2,8 @@
 //  Copyright © 2021 Apparata AB. All rights reserved.
 //
 
+#if canImport(UIKit) && os(iOS)
+
 import UIKit
 
 // MARK: - Alert
@@ -245,3 +247,5 @@ public struct AlertBuilder {
         return components.flatMap { $0 }
     }
 }
+
+#endif

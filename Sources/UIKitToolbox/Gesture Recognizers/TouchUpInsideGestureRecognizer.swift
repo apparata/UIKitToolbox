@@ -2,7 +2,7 @@
 //  Copyright © 2016 Apparata AB. All rights reserved.
 //
 
-#if canImport(UIKit)
+#if canImport(UIKit) && os(iOS)
 
 import UIKit
 import UIKit.UIGestureRecognizerSubclass

@@ -2,6 +2,8 @@
 //  Copyright © 2018 Apparata AB. All rights reserved.
 //
 
+#if canImport(UIKit) && os(iOS)
+
 import UIKit
 
 public class DestructiveConfirmAlert {
@@ -41,3 +43,5 @@ public class DestructiveConfirmAlert {
         return self
     }
 }
+
+#endif

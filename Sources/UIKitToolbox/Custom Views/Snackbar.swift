@@ -430,7 +430,7 @@ private final class SnackbarContainerView: UIView {
     }
 }
 
-private final class SnackbarAsyncOperation: Operation {
+private final class SnackbarAsyncOperation: Operation, @unchecked Sendable {
     
     private enum PropertyKey: String {
         case isReady

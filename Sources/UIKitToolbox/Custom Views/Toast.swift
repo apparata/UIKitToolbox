@@ -475,7 +475,7 @@ private final class ToastContainerView: UIView {
     
 }
 
-private final class ToastAsyncOperation: Operation {
+private final class ToastAsyncOperation: Operation, @unchecked Sendable {
     
     private enum PropertyKey: String {
         case isReady

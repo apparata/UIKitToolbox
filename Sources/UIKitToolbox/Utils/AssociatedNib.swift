@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public protocol AssociatedNib {
     
     static var associatedNib: UINib { get }

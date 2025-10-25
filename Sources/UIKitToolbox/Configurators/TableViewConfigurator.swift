@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class TableViewConfigurator {
     
     private let tableView: UITableView

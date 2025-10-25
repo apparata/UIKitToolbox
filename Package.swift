@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:6.2
 
 import PackageDescription
 
@@ -6,7 +6,7 @@ let package = Package(
     name: "UIKitToolbox",
     platforms: [
         // Relevant platforms.
-        .iOS(.v13), .macOS(.v10_15), .tvOS(.v13), .visionOS(.v1)
+        .iOS(.v16), .macOS(.v13), .tvOS(.v16), .visionOS(.v1)
     ],
     products: [
         .library(name: "UIKitToolbox", targets: ["UIKitToolbox"])

@@ -32,7 +32,7 @@ public class BlurPresentationController: UIPresentationController {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
     }
     
-    deinit {
+    isolated deinit {
         cleanUp()
     }
     

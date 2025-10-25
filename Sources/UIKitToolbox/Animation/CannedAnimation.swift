@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class CannedAnimation {
 
     public static func shakeHorizontally(view: UIView) {

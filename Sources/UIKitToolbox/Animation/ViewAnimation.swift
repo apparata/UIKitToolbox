@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public struct ViewAnimation {
     
     public enum AnimationType {

@@ -32,7 +32,7 @@ import UIKit
 /// }
 /// ```
 ///
-public protocol SegueHandlerType {
+@MainActor public protocol SegueHandlerType {
     associatedtype SegueIdentifier: RawRepresentable
     
     func performSegueWithIdentifier(segueIdentifier: SegueIdentifier,

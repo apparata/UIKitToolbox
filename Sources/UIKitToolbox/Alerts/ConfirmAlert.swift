@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class ConfirmAlert {
     
     let alertController: UIAlertController

@@ -82,6 +82,7 @@ public class ActionSheet: AbstractAlert {
 
 // MARK: - Abstract Alert
 
+@MainActor
 public class AbstractAlert {
     
     public let alertController: UIAlertController

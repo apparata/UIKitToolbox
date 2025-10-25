@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class ViewAboveKeyboardMover {
 
     private let keyboardObserver = KeyboardObserver()

@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public func indexPathsForElementsInRect(collectionView: UICollectionView, rect: CGRect) -> [NSIndexPath]? {
     guard let allLayoutAttributes = collectionView.collectionViewLayout.layoutAttributesForElements(in: rect) else {
         return nil
@@ -22,10 +23,12 @@ public func indexPathsForElementsInRect(collectionView: UICollectionView, rect: 
     return indexPaths
 }
 
+@MainActor
 public func dequeueCell<T: UICollectionViewCell>(collectionView: UICollectionView, identifier: String, for indexPath: IndexPath) -> T {
     return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! T
 }
 
+@MainActor
 public func dequeueCell<T: CellReuseIdentifier>(collectionView: UICollectionView, for indexPath: IndexPath) -> T {
     return collectionView.dequeueReusableCell(withReuseIdentifier: T.cellReuseIdentifier, for: indexPath) as! T
 }

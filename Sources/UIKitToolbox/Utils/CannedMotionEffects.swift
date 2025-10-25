@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class CannedMotionEffects {
     
     public static func tilt(amplitude: NSInteger = 15) -> UIMotionEffect {

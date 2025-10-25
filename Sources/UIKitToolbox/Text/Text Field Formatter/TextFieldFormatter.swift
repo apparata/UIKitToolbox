@@ -38,7 +38,7 @@ public class TextFieldFormatter: NSObject, UITextFieldDelegate {
         attachTo(textField: textField, asDelegate: asDelegate)
     }
     
-    deinit {
+    isolated deinit {
         detach()
     }
     

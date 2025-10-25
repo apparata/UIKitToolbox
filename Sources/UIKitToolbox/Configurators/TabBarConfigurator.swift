@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class TabBarConfigurator {
     
     private let tabBar: UITabBar?

@@ -28,7 +28,7 @@ public class StackedModalPresentationController: UIPresentationController {
     
     // MARK: - Cleanup
     
-    deinit {
+    isolated deinit {
         cleanUp()
     }
     

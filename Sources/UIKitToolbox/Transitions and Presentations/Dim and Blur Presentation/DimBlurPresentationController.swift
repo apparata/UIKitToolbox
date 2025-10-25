@@ -30,7 +30,7 @@ public class DimBlurPresentationController: UIPresentationController {
         super.init(presentedViewController: presented, presenting: presenting)
     }
     
-    deinit {
+    isolated deinit {
         cleanUp()
     }
     

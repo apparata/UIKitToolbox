@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class DestructiveConfirmAlert {
     
     let alertController: UIAlertController

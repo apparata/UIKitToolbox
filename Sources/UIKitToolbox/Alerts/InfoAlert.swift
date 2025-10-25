@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class InfoAlert {
     
     let alertController: UIAlertController

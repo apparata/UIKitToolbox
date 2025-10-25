@@ -18,6 +18,7 @@ public protocol RestorableActivityHandler {
     func restore(activity: RestorableActivity, context: Any)
 }
 
+@MainActor
 public protocol RestorableActivityHandlerContainer: RestorableActivityHandler {
     
     func primaryRestorableActivityHandler(for activity: RestorableActivity) -> UIResponder?

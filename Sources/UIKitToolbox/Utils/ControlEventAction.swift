@@ -6,6 +6,7 @@
 
 import UIKit
 
+@MainActor
 public class ControlEventAction<Control: UIControl> {
 
     private weak var control: Control?
@@ -21,7 +22,7 @@ public class ControlEventAction<Control: UIControl> {
         control.addTarget(self, action: #selector(eventOccurred(_:)), for: event)
     }
 
-    deinit {
+    isolated deinit {
         control?.removeTarget(self, action: #selector(eventOccurred(_:)), for: event)
     }
 

@@ -8,6 +8,7 @@ import UIKit
 
 /// Conforming classes have a child view controller that should be added
 /// by calling the methods declared by the protocol.
+@MainActor
 public protocol ChildViewControllerAdder {
     
     var childViewControllerContainerView: UIView { get }
